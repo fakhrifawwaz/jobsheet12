@@ -1,18 +1,12 @@
 import java.util.Scanner;
 
 public class Kafe15{
-    public static void Menu(String namaPelanggan, boolean isMember, String kodePromo) {
+    public static void Menu(String namaPelanggan, boolean isMember) {
         System.out.println("Selamat datang, " + namaPelanggan + "!");
         if (isMember) {
             System.out.println("Anda adalah member, dapatkan diskon 10% untuk setiap pembelian!");
         }
-        if (kodePromo.equals("DISKON50")) {
-            System.out.println("Selamat anda mendapatkan diskon sebesar 50%");
-        }else if (kodePromo.equals("DISKON30")){
-            System.out.println("Selamat anda mendapatkan diskon sebesar 30%");
-        }else if (!kodePromo.isEmpty()){
-            System.out.println("Kode promo invalid");
-        }
+
 
         System.out.println("===== MENU RESTO KAFE =====");
         System.out.println("1. Kopi Hitam - Rp 15.000");
@@ -24,31 +18,55 @@ public class Kafe15{
         System.out.println("===========================");
         System.out.println("Silahkan pilih menu yang anda inginkan.");
     }
-    public static int hitungTotalHarga(int pilihanMenu, int banyakItem) {
+    public static int hitungTotalHarga(int pilihanMenu, int banyakItem,String kodePromo) {
         int[] hargaItems = {15000, 20000, 22000, 12000, 10000, 18000};
-        
         int hargaTotal = hargaItems[pilihanMenu - 1] * banyakItem;
+
+        if (kodePromo.equals("DISKON50")) {
+            int diskon = hargaTotal * 50 / 100;
+            System.out.println("Diskon 50%: Rp " + diskon);
+            hargaTotal -= diskon;
+
+        } else if (kodePromo.equals("DISKON30")) {
+            int diskon = hargaTotal * 30 / 100;
+            System.out.println("Diskon 30%: Rp " + diskon);
+            hargaTotal -= diskon;
+
+        } else if (!kodePromo.isEmpty()) {
+            System.out.println("Kode promo invalid.");
+        }
+        
+        hargaTotal = hargaItems[pilihanMenu - 1] * banyakItem;
         return hargaTotal;
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        
-        // Panggil fungsi Menu
-        Menu("Andi", true, "");
-        
-        // Input dari pengguna
-        System.out.print("\nMasukkan nomor menu yang ingin Anda pesan: ");
+    Scanner sc = new Scanner(System.in);
+    Menu("Andi", true);
+    
+    int totalKeseluruhan = 0;
+    String lanjut = "y";
+    
+    while (lanjut.equalsIgnoreCase("y")) {
+        System.out.print("\nNomor menu: ");
         int pilihanMenu = sc.nextInt();
         
-        System.out.print("Masukkan jumlah item yang ingin dipesan: ");
+        System.out.print("Jumlah item: ");
         int banyakItem = sc.nextInt();
+        sc.nextLine();
         
-        int totalBayar = hitungTotalHarga(pilihanMenu, banyakItem);
+        System.out.print("Kode promo: ");
+        String kodePromo = sc.nextLine();
         
-        // total
-        System.out.println("Total harga untuk pesanan Anda: Rp " + totalBayar);
+        int subtotal = hitungTotalHarga(pilihanMenu, banyakItem, kodePromo);
+        totalKeseluruhan += subtotal;
+        System.out.println("Subtotal: Rp " + subtotal);
         
-        sc.close();
+        System.out.print("Tambah pesanan? (y/n): ");
+        lanjut = sc.nextLine();
+    }
+    
+    System.out.println("\nTOTAL KESELURUHAN: Rp " + totalKeseluruhan);
+    sc.close();
     }
 }
