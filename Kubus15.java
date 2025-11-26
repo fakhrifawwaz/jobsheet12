@@ -21,7 +21,7 @@ public class Kubus15 {
         
         vol = hitungVolume(sisi);
         System.out.println("Volume kubus adalah: " + vol);
-        
+
         luas = hitungLuasPermukaan(sisi);
         System.out.println("Luas permukaan kubus adalah: " + luas);
         
