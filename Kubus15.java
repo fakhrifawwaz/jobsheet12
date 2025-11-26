@@ -1,29 +1,30 @@
 import java.util.Scanner;
 
 public class Kubus15 {
-
-    static int hitungLuas (int sisi){
-        int luas = 6 * sisi;
-        return luas;
-    }
-
-    static int hitungVolume (int s){
-        int volume = s * s * s;
+    
+    static int hitungVolume(int sisi) {
+        int volume = sisi * sisi * sisi;
         return volume;
     }
-
+    
+    static int hitungLuasPermukaan(int sisi) {
+        int luasPermukaan = 6 * sisi * sisi;
+        return luasPermukaan;
+    }
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int sisi, L, volume;
-        System.out.println("Masukkan sisi kubus");
+        int sisi, vol, luas;
+        
+        System.out.print("Masukkan panjang sisi kubus: ");
         sisi = sc.nextInt();
-
-        L = 6 * (sisi * sisi);
-        System.out.println("Luas permukaan kubusnya adalah " + L );
-        volume = sisi * sisi * sisi;
-        System.out.println("Volume kubusnya adalah " +volume);
-
+        
+        vol = hitungVolume(sisi);
+        System.out.println("Volume kubus adalah: " + vol);
+        
+        luas = hitungLuasPermukaan(sisi);
+        System.out.println("Luas permukaan kubus adalah: " + luas);
+        
         sc.close();
-
     }
 }
