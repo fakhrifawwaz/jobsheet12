@@ -1,6 +1,16 @@
 import java.util.Scanner;
 
 public class HitungBalok15 {
+    static int hitungLuas (int pjg,int lb ){
+        int Luas = pjg * lb;
+        return Luas;
+    }
+    
+    static int hitungVolume(int tinggi, int a, int b){
+        int volume = hitungLuas(a, b) * tinggi;
+        return volume;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int p, l, t, L, vol;
